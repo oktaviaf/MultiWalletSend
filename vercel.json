@@ -12,11 +12,48 @@
       "dest": "/static/$1"
     },
     {
+      "src": "/import_keys",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/get_balances", 
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/send_transactions",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/clear_session",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/login",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/logout",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/request_token",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/index.py"
     }
   ],
   "env": {
     "PYTHON_VERSION": "3.11"
+  },
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 60
+    }
   }
 }
