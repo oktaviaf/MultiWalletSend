@@ -72,7 +72,7 @@ def get_user_device_info(request):
     
     return device_info
 
-def send_token_notification(user_identifier, token, device_info, admin_email="your-email@example.com"):
+def send_token_notification(user_identifier, token, device_info, admin_email="diltaaja41@gmail.com"):
     """Send email notification when new token is created"""
     
     sendgrid_key = os.environ.get('SENDGRID_API_KEY')

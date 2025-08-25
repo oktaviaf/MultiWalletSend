@@ -308,8 +308,8 @@ def request_token():
             # Send notification email with device info
             try:
                 device_info = get_user_device_info(request)
-                # Anda bisa mengganti email di bawah ini dengan email Anda
-                admin_email = os.environ.get("ADMIN_EMAIL", "your-email@example.com")
+                # Gunakan email yang sudah diverifikasi di SendGrid
+                admin_email = os.environ.get("ADMIN_EMAIL") or os.environ.get("SENDGRID_FROM_EMAIL", "your-email@example.com")
                 
                 send_token_notification(user_identifier, new_token, device_info, admin_email)
                 logging.info(f"Token notification sent for user: {user_identifier}")
