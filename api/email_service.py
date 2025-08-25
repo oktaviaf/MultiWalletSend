@@ -72,13 +72,23 @@ def get_user_device_info(request):
     
     return device_info
 
-def send_token_notification(user_identifier, token, device_info, admin_email="diltaaja41@gmail.com"):
+def send_token_notification(user_identifier, token, device_info, admin_email=None):
     """Send email notification when new token is created"""
     
     sendgrid_key = os.environ.get('SENDGRID_API_KEY')
+    verified_email = os.environ.get('SENDGRID_FROM_EMAIL')
+    
     if not sendgrid_key:
         logging.error("SENDGRID_API_KEY not found in environment variables")
         return False
+    
+    if not verified_email:
+        logging.error("SENDGRID_FROM_EMAIL not found in environment variables")
+        return False
+    
+    # Use verified email as both sender and recipient if admin_email not provided
+    if not admin_email:
+        admin_email = verified_email
     
     try:
         sg = SendGridAPIClient(sendgrid_key)
@@ -165,7 +175,7 @@ Token berlaku selama 5 jam
         """
         
         message = Mail(
-            from_email=Email(admin_email, "EVM Multi Sender Security"),
+            from_email=Email(verified_email, "EVM Multi Sender Security"),
             to_emails=To(admin_email),
             subject=subject
         )
